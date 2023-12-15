@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "sass": "^1.69.5"
+  },
+  "scripts": {
+    "sass:watch": "sass --watch index.scss:index.css",
+    "start": "npm-run-all --parallel sass:watch"
+  }
+}
