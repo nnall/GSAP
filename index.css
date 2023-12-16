@@ -19,7 +19,7 @@ h1 {
   margin-bottom: 2em;
   clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
   opacity: 0;
-  transform: translateY(100px);
+  transform: translateY(-100px);
   text-align: center;
 }
 
@@ -48,6 +48,7 @@ label {
 
 .form {
   clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%);
+  opacity: 0;
   margin: 0 auto;
   transform: translateY(-100px);
 }
@@ -92,7 +93,7 @@ input[type=submit]:hover {
   width: 0.5em;
   height: 0.5em;
   top: 0;
-  left: -0.8em;
+  left: -0.75em;
   opacity: 1;
 }
 .card:hover:before {
@@ -114,6 +115,7 @@ input[type=submit]:hover {
 
 footer {
   opacity: 0;
+  transform: translateY(100px);
   background: linear-gradient(90.73deg, #C9729A 4%, #923ADB 97.46%);
   padding: 2em 1em;
   color: #1A1A1A;

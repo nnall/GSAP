@@ -36,26 +36,26 @@
           </div>
         </div>
         <div class="features">
-          <div class="card">
+          <div class="card card_1">
             <p class="title">Modular</p>
             <p class="desc">
               Go beyond teaching with just video. Choose from our library of
               interactive modules or create your own.
             </p>
           </div>
-          <div class="card">
+          <div class="card card_2">
             <p class="title">Customizable</p>
             <p class="desc">
               Use our Headless API to build truly custom frontends.
             </p>
           </div>
-          <div class="card">
+          <div class="card card_3">
             <p class="title">PPP &amp; Managed Payments</p>
             <p class="desc">
               Offer parity pricing, and leave the headache of processing to us.
             </p>
           </div>
-          <div class="card">
+          <div class="card card_4">
             <p class="title">Built by Teachers</p>
             <p class="desc">
               Co-Founder Gary Simon has been teaching online for over 12 years.
@@ -136,7 +136,15 @@
       //pseudo elements must get a defined variable
       let flagpoles = CSSRulePlugin.getRule(".card:before");
 
+      let cards = CSSRulePlugin.getRule(".card:before");
+
       //.to() VS .from()
+
+      //outcome: An element is placed in one area, and moves into  another area/state upon being triggered.
+
+      //you can accomplish this either by setting their 'before' state in the CSS, and using a '.to()' to mobve it into the 'after' position.
+
+      //or you can define the 'before' state inside a .from() and its 'after' state in the CSS
 
       //.to()
       // starting from defined CSS, TO something - the argument provided)
@@ -149,18 +157,31 @@
       tl.to("h1", {
         "clip-path": "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
         opacity: 1,
-        y: 0,
+        y: 0, // started at y 100px, so "to 0", going up
         duration: 2.2,
-      }).to(
-        ".form",
-        {
-          "clip-path": "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-          opacity: 1,
-          y: 0,
-          duration: 2,
-        },
-        "-=2.2"
-      );
+      })
+        .to(
+          ".form",
+          {
+            "clip-path": "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+            opacity: 1,
+            y: 0, //started at y -100px, so "to 0" or going down
+            duration: 2,
+          },
+          "-=1.2"
+        )
+        .from(".card", { scaleY: 0, y: 400, stagger: 0.2 }, "-=2")
+        .from(flagpoles, { opacity: 0, y: 400, stagger: 1 }, "-=2")
+        .to(
+          ".title, .desc",
+          { y: 0, stagger: 0.1, duration: 1.2, opacity: 1 },
+          "-=2"
+        )
+        .to("footer", { opacity: 1, y: 0 }, "-=2");
+
+      card.addEventListener("click", () => {
+        tl.play();
+      });
     </script>
   </body>
 </html>
