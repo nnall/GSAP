@@ -4,6 +4,12 @@ import "./index.scss";
 // typical import
 import gsap from "gsap";
 
+//NON-GSAP way to select characters, words,
+import SplitType from "split-type";
+
+//There is also a built-in version called 'splitText'
+// https://gsap.com/docs/v3/Plugins/SplitText/
+
 import Lenis from "@studio-freight/lenis";
 
 import scrollTrigger from "gsap/ScrollTrigger";
@@ -16,29 +22,58 @@ const Home = () => {
     // Step 1: Create a GSAP timeline
     let tl = gsap.timeline();
 
-    // tl.to("h1", {
-    //   x: 0,
-    //   scrollTrigger: {
-    //     defaults: { ease: "power4.inOut", duration: 2 },
-    //     trigger: ".spacer_1",
-    //     start: "10% 100%",
-    //     end: "55% 50%",
-    //     scrub: true,
-    //     markers: true,
-    //   },
+    const splitTypes = document.querySelectorAll(".reveal-type"); //<--- the paragraph <p/>. Here, throwing into array even though only one.
+
+    const my_para = document.querySelector(".reveal-type");
+
+    //now transform <p/> into subdivided elements (chars, lines, words), saved to object
+    const text = new SplitType(my_para, { types: "chars, words, lines" });
+
+    // const linesArray = [...text.lines];
+
+    // linesArray.forEach((line) => {
+    //   tl.to(line, {
+    //     x: 0,
+    //     scrollTrigger: {
+    //       defaults: { ease: "power4.inOut", duration: 2 },
+    //       trigger: ".spacer_2",
+    //       start: "40% 100%",
+    //       end: "45% 50%",
+    //       scrub: true,
+
+    //     },
+    // opacity: 0.2,
+    // stagger: 1, //adjust this to make the letter-by-letter animation go a little faster
+    // });
     // });
 
-    tl.to("p", {
-      x: 0,
+    tl.to(text.lines, {
       scrollTrigger: {
         defaults: { ease: "power4.inOut", duration: 2 },
         trigger: ".spacer_2",
         start: "40% 100%",
-        end: "55% 50%",
+        end: "90% 30%",
         scrub: true,
         markers: true,
       },
+      x: 0,
+      opacity: 0.2,
+      stagger: 1, //adjust this to make the letter-by-letter animation go a little faster
     });
+
+    // tl.to("p", {
+    //   x: 0,
+    //   scrollTrigger: {
+    //     defaults: { ease: "power4.inOut", duration: 2 },
+    //     trigger: ".spacer_2",
+    //     start: "40% 100%",
+    //     end: "45% 50%",
+    //     scrub: true,
+    //     // markers: true,
+    //   },
+    //   stagger: 1,
+    //   opacity: 0.2,
+    // });
 
     tl.to(".h2-3", {
       x: 0,
@@ -46,9 +81,9 @@ const Home = () => {
         defaults: { ease: "power4.inOut", duration: 2 },
         trigger: ".spacer_3",
         start: "35% 100%",
-        end: "55% 50%",
+        end: "45% 50%",
         scrub: true,
-        markers: true,
+        // markers: true,
       },
     });
 
@@ -58,9 +93,9 @@ const Home = () => {
         defaults: { ease: "power4.inOut", duration: 2 },
         trigger: ".spacer_4",
         start: "35% 100%",
-        end: "55% 50%",
+        end: "45% 50%",
         scrub: true,
-        markers: true,
+        // markers: true,
       },
     });
     tl.to(".h2-5", {
@@ -69,9 +104,9 @@ const Home = () => {
         defaults: { ease: "power4.inOut", duration: 2 },
         trigger: ".spacer_5",
         start: "35% 100%",
-        end: "55% 50%",
+        end: "45% 50%",
         scrub: true,
-        markers: true,
+        // markers: true,
       },
     });
     tl.to(".h2-6", {
@@ -80,9 +115,9 @@ const Home = () => {
         defaults: { ease: "power4.inOut", duration: 2 },
         trigger: ".spacer_6",
         start: "35% 100%",
-        end: "55% 50%",
+        end: "45% 50%",
         scrub: true,
-        markers: true,
+        // markers: true,
       },
     });
     tl.to(".h2-7", {
@@ -91,9 +126,9 @@ const Home = () => {
         defaults: { ease: "power4.inOut", duration: 2 },
         trigger: ".spacer_7",
         start: "35% 100%",
-        end: "55% 50%",
+        end: "45% 50%",
         scrub: true,
-        markers: true,
+        // markers: true,
       },
     });
     tl.to(".h2-8", {
@@ -102,9 +137,9 @@ const Home = () => {
         defaults: { ease: "power4.inOut", duration: 2 },
         trigger: ".spacer_8",
         start: "35% 100%",
-        end: "55% 50%",
+        end: "45% 50%",
         scrub: true,
-        markers: true,
+        // markers: true,
       },
     });
     tl.to(".h2-9", {
@@ -115,7 +150,7 @@ const Home = () => {
         start: "50% 100%",
         end: "75% 50%",
         scrub: true,
-        markers: true,
+        // markers: true,
       },
     });
 
@@ -127,37 +162,46 @@ const Home = () => {
         start: "35% 100%",
         end: "55% 50%",
         scrub: true,
-        markers: true,
+        // markers: true,
       },
     });
 
-    // Step 3: Create a ScrollTrigger to activate the timeline
+    //SPLIT-TYPES - splitting text elements into smaller divs "chars, words, lines(?)" and aplying a scrolltrigger to those smaller elements
 
-    // tl.to("h1", { x: 0, duration: 2 });
-    // tl.to("h2", { x: 0, duration: 2 });
-    // tl.to("p", { x: 0, duration: 2 });
-    // tl.to("img", { x: 0, duration: 2 });
-    // tl.to("h1", { x: 0 });
-    // tl.to("h1", { x: 0 });
+    console.log(text.lines);
 
-    // ScrollTrigger.create({
-    //   animation: tl,
-    //   trigger: ".spacer",
-    //   start: "top 50%", // when to start the animation
-    //   end: "top 30%", // when to end the animation
-    //   scrub: true, // smooth scrubbing effect
-    //   markers: true, // for debugging, shows the trigger area
+    // gsap.from(text.chars, {
+    //   // duration: 0.002, // Set the duration to 2 seconds (adjust as needed)
+    //   // ease: "power2.inOut", // Set an easing function (adjust as needed)
+    //   scrollTrigger: {
+    //     trigger: my_para,
+    //     start: "top 50%",
+    //     end: "top 20",
+    //     scrub: false, //if true, then play is based on scroll, if false, it just plays.
+    //     markers: false,
+    //   },
+    //   opacity: 0.2,
+    //   stagger: 0.02, //adjust this to make the letter-by-letter animation go a little faster
     // });
 
-    // Step 2: Add animations to the timeline
-    // ScrollTrigger
-    //   .to("h1", { x: 0 })
-    //   .to("h2", { x: 0 })
-    //   .to("p", { x: 0 })
-    //   .to("img", { x: 0 });
+    gsap.from(text.lines, {
+      // duration: 0.002, // Set the duration to 2 seconds (adjust as needed)
+      // ease: "power2.inOut", // Set an easing function (adjust as needed)
+      scrollTrigger: {
+        trigger: my_para,
+        start: "top 50%",
+        end: "top 20",
+        scrub: false, //if true, then play is based on scroll, if false, it just plays.
+        markers: false,
+      },
+      opacity: 0.2,
+      stagger: 0.02, //adjust this to make the letter-by-letter animation go a little faster
+    });
   }, []);
 
-  const lenis = new Lenis();
+  // Above, when you set 'new SplitType()', include 'words', and not just 'chars' in the "types", because otherwise the <p/> gets spit up into individual letters only, and there will be a line break on letters instead of complete words.
+
+  const lenis = new Lenis({ duration: 1.4 });
 
   lenis.on("scroll", (e) => {
     // console.log(e);
@@ -178,7 +222,7 @@ const Home = () => {
 
       <div className="spacer spacer_2">
         {/* <h2>We're glad you're here..</h2> */}
-        <p>
+        <p className="reveal-type">
           In the old world, I'd be sitting on a fire escape in some European
           city smoking a cigarette right now, watching people get out into the
           street below. Another day. I don't know that I'd feel any more or less

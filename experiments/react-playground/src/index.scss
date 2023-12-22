@@ -54,12 +54,14 @@ body {
 }
 
 .spacer {
+    padding:8%;
     height: 100vh;
     width: 100%;
     border: 2px solid red;
     display: flex ;
     justify-content: center ;
     align-items: center ;
+    overflow:hidden;
 }
 
 
@@ -69,17 +71,8 @@ body {
 h1 {
     font-size: calc(10rem + 10vw) !important;
     font-family: 'Silkscreen', sans-serif;
-    // position: absolute;
-    // top: 40%;
-    // bottom: 0;
-    // left: 10%;
-    // height:100px;
-    // position:relative;
-    // left:1200px;
     line-height: .75;
-    // align-self: flex-end;
     border:1px solid red;
-
 }
 
 
