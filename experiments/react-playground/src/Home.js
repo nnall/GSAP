@@ -19,61 +19,109 @@ gsap.registerPlugin(scrollTrigger);
 
 const Home = () => {
   useEffect(() => {
+    //SPLIT-TYPES
+
+    // SPLIT-TYPES - H1 (Hey There)
+    const myText = new SplitType("#my-text");
+
+    gsap.to(
+      ".char",
+      {
+        y: 0,
+        stagger: 0.04,
+        // delay: 0.2,
+        duration: 0.1,
+      },
+      "-=.1"
+    );
+
     // Step 1: Create a GSAP timeline
     let tl = gsap.timeline();
-
-    const splitTypes = document.querySelectorAll(".reveal-type"); //<--- the paragraph <p/>. Here, throwing into array even though only one.
-
-    const my_para = document.querySelector(".reveal-type");
-
-    //now transform <p/> into subdivided elements (chars, lines, words), saved to object
+    // SPLIT-TYPES - PARA
+    const my_para = document.querySelector(".reveal-type"); // SELECT PARA
     const text = new SplitType(my_para, { types: "chars, words, lines" });
 
-    // const linesArray = [...text.lines];
+    const lines = [...text.lines];
 
-    // linesArray.forEach((line) => {
-    //   tl.to(line, {
-    //     x: 0,
-    //     scrollTrigger: {
-    //       defaults: { ease: "power4.inOut", duration: 2 },
-    //       trigger: ".spacer_2",
-    //       start: "40% 100%",
-    //       end: "45% 50%",
-    //       scrub: true,
+    // console.log(lines);
 
-    //     },
-    // opacity: 0.2,
-    // stagger: 1, //adjust this to make the letter-by-letter animation go a little faster
-    // });
-    // });
-
-    tl.to(text.lines, {
-      scrollTrigger: {
-        defaults: { ease: "power4.inOut", duration: 2 },
-        trigger: ".spacer_2",
-        start: "40% 100%",
-        end: "90% 30%",
-        scrub: true,
-        markers: true,
-      },
-      x: 0,
-      opacity: 0.2,
-      stagger: 1, //adjust this to make the letter-by-letter animation go a little faster
+    lines.forEach((line, index) => {
+      tl.to(
+        line,
+        {
+          x: "-100vw",
+          duration: 3,
+          // opacity: 1,
+        },
+        "-=2.5"
+      );
+    });
+    scrollTrigger.create({
+      trigger: ".spacer_2",
+      start: "45% 100%",
+      end: "30% 30%",
+      scrub: true,
+      markers: true, // for debugging
+      animation: tl, // Assign the timeline to ScrollTrigger
     });
 
-    // tl.to("p", {
-    //   x: 0,
-    //   scrollTrigger: {
-    //     defaults: { ease: "power4.inOut", duration: 2 },
-    //     trigger: ".spacer_2",
-    //     start: "40% 100%",
-    //     end: "45% 50%",
-    //     scrub: true,
-    //     // markers: true,
-    //   },
-    //   stagger: 1,
-    //   opacity: 0.2,
+    // let tl2 = gsap.timeline();
+    // const linesRev = [...lines].reverse();
+
+    // linesRev.forEach((line, index) => {
+    //   tl.to(
+    //     line,
+    //     {
+    //       x: "-200vw",
+    //       duration: 3,
+    //       // opacity: 1,
+    //     },
+    //     "-=2.5"
+    //   );
     // });
+
+    // scrollTrigger.create({
+    //   trigger: ".spacer_2",
+    //   start: "125% 100%",
+    //   end: "1000% 30%",
+    //   scrub: true,
+    //   markers: true, // for debugging
+    //   animation: tl2, // Assign the timeline to ScrollTrigger
+    // });
+
+    // const setupTl2 = () => {
+    //   // scrollTrigger.kill(".spacer_2"); // Kill the previous ScrollTrigger for tl2 if exists
+
+    //   let tl2 = gsap.timeline();
+    //   const linesRev = [...lines].reverse();
+
+    //   linesRev.forEach((line, index) => {
+    //     tl.to(
+    //       line,
+    //       {
+    //         x: "-200vw",
+    //         duration: 3,
+    //         // opacity: 1,
+    //       },
+    //       "-=2.5"
+    //     );
+    //   });
+
+    //   // Second ScrollTrigger for the reversed set of lines
+    //   scrollTrigger.create({
+    //     trigger: ".spacer_2",
+    //     start: "125% 100%",
+    //     end: "1000% 30%",
+    //     scrub: true,
+    //     markers: true,
+    //     animation: tl2,
+    //   });
+    // };
+
+    // // Call the setupTl2 function after setting up tl
+    // setupTl2();
+
+    //// PARA END
 
     tl.to(".h2-3", {
       x: 0,
@@ -165,42 +213,11 @@ const Home = () => {
         // markers: true,
       },
     });
-
-    //SPLIT-TYPES - splitting text elements into smaller divs "chars, words, lines(?)" and aplying a scrolltrigger to those smaller elements
-
-    console.log(text.lines);
-
-    // gsap.from(text.chars, {
-    //   // duration: 0.002, // Set the duration to 2 seconds (adjust as needed)
-    //   // ease: "power2.inOut", // Set an easing function (adjust as needed)
-    //   scrollTrigger: {
-    //     trigger: my_para,
-    //     start: "top 50%",
-    //     end: "top 20",
-    //     scrub: false, //if true, then play is based on scroll, if false, it just plays.
-    //     markers: false,
-    //   },
-    //   opacity: 0.2,
-    //   stagger: 0.02, //adjust this to make the letter-by-letter animation go a little faster
-    // });
-
-    gsap.from(text.lines, {
-      // duration: 0.002, // Set the duration to 2 seconds (adjust as needed)
-      // ease: "power2.inOut", // Set an easing function (adjust as needed)
-      scrollTrigger: {
-        trigger: my_para,
-        start: "top 50%",
-        end: "top 20",
-        scrub: false, //if true, then play is based on scroll, if false, it just plays.
-        markers: false,
-      },
-      opacity: 0.2,
-      stagger: 0.02, //adjust this to make the letter-by-letter animation go a little faster
-    });
   }, []);
 
   // Above, when you set 'new SplitType()', include 'words', and not just 'chars' in the "types", because otherwise the <p/> gets spit up into individual letters only, and there will be a line break on letters instead of complete words.
 
+  // SMOOTH SCROLL
   const lenis = new Lenis({ duration: 1.4 });
 
   lenis.on("scroll", (e) => {
@@ -217,22 +234,23 @@ const Home = () => {
   return (
     <div className="container">
       <div className="spacer spacer_1">
-        <h1>Hey</h1>
+        <h1 id="my-text">Hey there</h1>
       </div>
 
       <div className="spacer spacer_2">
         {/* <h2>We're glad you're here..</h2> */}
         <p className="reveal-type">
-          In the old world, I'd be sitting on a fire escape in some European
-          city smoking a cigarette right now, watching people get out into the
-          street below. Another day. I don't know that I'd feel any more or less
-          compelled to 'live' then than I do now. Which isn't saying much. We
-          are in odd places all the time. Even the "right" place is an odd one.
-          It is odd by the fact we're all agreeing that it, as opposed to
-          others, is not arbitrary, but approved, 'normal'. So live it! Let it
-          feel natural to you! Embrance it, Hug it! Your toy has arrrived. Your
-          vehicle is ready. Your plate is served. Why aren't you eating? Don't
-          you like it? Don't you?
+          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum alias,
+          veniam eius vitae soluta labore sed incidunt impedit, facere accusamus
+          rerum? Non repellat fuga ipsa quibusdam sed illo quae aliquam quod est
+          repellendus, modi dolorum eum ullam, velit veritatis delectus. Quae,
+          consequatur? Facere nihil quisquam quaerat quidem labore perspiciatis
+          et. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Modi in
+          quae dolorum molestiae commodi quos totam, veniam odit reiciendis.
+          Iusto eos autem maxime magnam inventore rerum eveniet consequuntur
+          magni amet consectetur illum saepe eligendi voluptatibus similique
+          deleniti minus eius, dolore, tempore ratione, officia provident! A,
+          ducimus! Magni perspiciatis similique blanditiis!
         </p>
       </div>
       <div className="spacer spacer_3">
