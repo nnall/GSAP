@@ -21,8 +21,8 @@ const Home = () => {
   useEffect(() => {
     //SPLIT-TYPES
 
-    // SPLIT-TYPES - H1 (Hey There)
-    const myText = new SplitType("#my-text");
+    // SPLIT-TYPES -
+    const myText = new SplitType("#my-text"); //H1 (Hey There)
 
     gsap.to(
       ".char",
@@ -37,44 +37,64 @@ const Home = () => {
 
     // Step 1: Create a GSAP timeline
     let tl = gsap.timeline();
-    // SPLIT-TYPES - PARA
+    let tl2 = gsap.timeline();
+
     const my_para = document.querySelector(".reveal-type"); // SELECT PARA
-    const text = new SplitType(my_para, { types: "chars, words, lines" });
+    const text = new SplitType(my_para); //For the <p/>
 
     const lines = [...text.lines];
+    const linesRev = [...lines].reverse();
 
-    // console.log(lines);
+    const chars = [...text.chars];
 
     lines.forEach((line, index) => {
       tl.to(
         line,
         {
-          x: "-100vw",
+          x: 0,
           duration: 3,
-          // opacity: 1,
         },
         "-=2.5"
       );
     });
+
+    // gsap.from(text.chars, {
+    //   scrollTrigger: {
+    //     trigger: ".char",
+    //     start: "top 80%",
+    //     end: "top 20%",
+    //     scrub: true,
+    //     markers: true,
+    //   },
+    // });
     scrollTrigger.create({
       trigger: ".spacer_2",
-      start: "45% 100%",
-      end: "30% 30%",
+      start: "40% 100%",
+      end: "35% 30%",
       scrub: true,
-      markers: true, // for debugging
+      markers: false, // for debugging
       animation: tl, // Assign the timeline to ScrollTrigger
     });
 
-    // let tl2 = gsap.timeline();
-    // const linesRev = [...lines].reverse();
+    scrollTrigger.create({
+      trigger: ".spacer_2",
+      start: "40% 100%",
+      end: "35% 30%",
+      scrub: true,
+      markers: false, // for debugging
+      animation: tl, // Assign the timeline to ScrollTrigger
+    });
 
     // linesRev.forEach((line, index) => {
-    //   tl.to(
+    //   tl2.fromTo(
     //     line,
     //     {
-    //       x: "-200vw",
+    //       x: 0, // Start value
+    //     },
+    //     {
+    //       x: "-100vw", // End value
     //       duration: 3,
-    //       // opacity: 1,
+    //       // Any other properties you want to set
     //     },
     //     "-=2.5"
     //   );
@@ -82,8 +102,8 @@ const Home = () => {
 
     // scrollTrigger.create({
     //   trigger: ".spacer_2",
-    //   start: "125% 100%",
-    //   end: "1000% 30%",
+    //   start: "110% 100%",
+    //   end: "120% 30%",
     //   scrub: true,
     //   markers: true, // for debugging
     //   animation: tl2, // Assign the timeline to ScrollTrigger
@@ -234,7 +254,7 @@ const Home = () => {
   return (
     <div className="container">
       <div className="spacer spacer_1">
-        <h1 id="my-text">Hey there</h1>
+        <h1 id="my-text">Nick.Nall</h1>
       </div>
 
       <div className="spacer spacer_2">
